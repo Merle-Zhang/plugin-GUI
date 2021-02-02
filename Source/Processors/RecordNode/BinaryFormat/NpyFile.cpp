@@ -72,7 +72,7 @@ bool NpyFile::openFile(String path)
         std::cerr << "Error creating file " << path << ":" << res.getErrorMessage() << std::endl;
         file.deleteFile();
         Result res = file.create();
-        std::cout << "Re-creating file: " << path << std::endl;
+        LOGD("Re-creating file: ", path);
     }
     
     //file.deleteFile(); // overwrite, never append a new .npy file to end of an existing one
@@ -80,6 +80,7 @@ bool NpyFile::openFile(String path)
     // each updateHeader() call triggers a m_file->flush() to disk:
     m_file = file.createOutputStream();
 
+    /*
     if (m_file == nullptr)
     {
         LOGD("FAILED to open file @", path);
@@ -91,6 +92,7 @@ bool NpyFile::openFile(String path)
             pad += " ";
         LOGD("Successfully opened file @", path, pad, m_file);
     }
+    */
     
     if (!m_file)
         return false;
